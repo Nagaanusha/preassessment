@@ -13,7 +13,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 public class StoreAvailabilityResp {
 
-	private String storeId;
+	private String storeID;
 	private LocalDateTime requestDate;
 	private String status;
 }
