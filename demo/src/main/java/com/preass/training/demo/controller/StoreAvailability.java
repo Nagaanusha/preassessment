@@ -32,7 +32,7 @@ public class StoreAvailability {
 		@PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
 		public ResponseEntity<StoreAvailabilityResp> storeAvailability(@RequestBody StoreAvailabilityResp sar){
 			
-			log.info("Initializing static store data" + sar.getStoreId());
+			log.info("Initializing static store data" + sar.getStoreID());
 			ArrayList<Calendar> stores = Stream
 			        .of(new Calendar("STORE001", "ALL", LocalTime.parse("13:30")),new Calendar("Store002", "SUNDAY", LocalTime.parse("13:30")) , new Calendar("Store003", "MONDAY", LocalTime.parse("13:30")))
 			        .collect(Collectors.toCollection(ArrayList::new));
@@ -46,10 +46,10 @@ public class StoreAvailability {
 			System.out.println("Time" + LocalTime.parse(timeString));
 			LocalTime storeTime =LocalTime.parse(timeString);
 			 boolean isExists = stores.stream().
-					anyMatch(e -> e.getLocationId().equals(sar.getStoreId()) &&
+					anyMatch(e -> e.getLocationId().equals(sar.getStoreID()) &&
 						(e.getDay().equals(sar.getRequestDate().getDayOfWeek().toString())||
 						e.getDay().equals("ALL"))&& 
-						e.getCustOffTime().compareTo(storeTime) <=0);
+						e.getCustOffTime().compareTo(storeTime) >=0);
 							
 			
 			if(isExists) {
